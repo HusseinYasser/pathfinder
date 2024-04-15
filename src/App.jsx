@@ -1,4 +1,4 @@
-import Grid from "./components/Grid"
+import PathFinder from "./components/PathFinder"
 
 function App() {
   
@@ -9,7 +9,7 @@ function App() {
         PathFinding Algos
       </div>
       <div>
-        <Grid />
+        <PathFinder />
       </div>
     </>
   )

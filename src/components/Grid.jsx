@@ -1,6 +1,7 @@
-import Node from './Node.jsx';
 
 import { useState } from 'react';
+
+import Node from './Node.jsx';
 
 const isTargetNode = (targetNode, i, j) => {
     return i == targetNode.row && j == targetNode.col;
@@ -10,7 +11,8 @@ const isWall = (i, j, walls) => {
     return walls.has(JSON.stringify({i, j}));
 }
 
-const Grid = () => {
+const Grid = ({ walls, setWalls }) => {
+
     const nodeOnMouseDown = (i, j) => {
         if(isTargetNode(startNode, i, j))
             setDragStart(true);
@@ -59,7 +61,6 @@ const Grid = () => {
     const [dragStart, setDragStart] = useState(false);
     const [dragEnd, setDragEnd] = useState(false);
     const [dragWall, setDragWall] = useState(false);
-    const [walls, setWalls] = useState(new Set());
 
     /* Creating the Grid */
     for(let i = 0; i < 30; ++i)
