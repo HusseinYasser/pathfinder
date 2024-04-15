@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 
 import { useState } from 'react';
 
@@ -23,10 +24,10 @@ const Grid = ({ walls, setWalls }) => {
     }
 
     const nodeOnMouseEnter = (i, j) => {
-        if(dragStart){
+        if(dragStart && JSON.stringify(endNode) != JSON.stringify({'row': i, 'col': j})){
             setStartNode({'row': i, 'col': j});
         }
-        else if(dragEnd)
+        else if(dragEnd && JSON.stringify(startNode) != JSON.stringify({'row': i, 'col': j}))
         {
             setEndNode({'row': i, 'col': j});
         }
