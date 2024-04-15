@@ -1,3 +1,6 @@
+
+import { isWall } from '../utils/utils';
+
 const dirX = [-1, 1, 0, 0];
 const dirY = [0, 0, -1, 1];
 
@@ -25,7 +28,8 @@ const bfs = (rows, cols, walls, startNode, endNode) => {
             let newX = currNode.row + val;
             let newY = currNode.col + dirY[idx];
             let newNode = {'row': newX, 'col': newY};
-            if(isValid(newX, newY, rows, cols) && !Object.prototype.hasOwnProperty.call(dis, JSON.stringify(newNode)) )
+            if(isValid(newX, newY, rows, cols) && !Object.prototype.hasOwnProperty.call(dis, JSON.stringify(newNode)) 
+        && !isWall(newX, newY, walls))
             {
                 //new node has to be added
                 queue.push(newNode);
@@ -36,6 +40,5 @@ const bfs = (rows, cols, walls, startNode, endNode) => {
     return visitedNodes;
 };
 
-console.log(bfs(50, 50, {}, {'row': 10, 'col': 10}, {'row': 11, 'col' : 11}));
 
 export default bfs;

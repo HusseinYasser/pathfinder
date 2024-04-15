@@ -1,9 +1,10 @@
 
 
 // eslint-disable-next-line react/prop-types
-const Node = ({ row, col, start, end, wall, onMouseDown, onMouseEnter, onMouseUp }) => {
+const Node = ({ row, col, start, end, wall, onMouseDown, onMouseEnter, onMouseUp, visited }) => {
 
     let nodeColor = wall ? 'bg-blue-700' : 'bg-white';
+    nodeColor = visited? 'bg-orange-500' : nodeColor;
     nodeColor = end ? 'bg-green-500' : nodeColor;
     nodeColor = start ? 'bg-red-700' : nodeColor;
 

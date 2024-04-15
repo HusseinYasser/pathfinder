@@ -2,17 +2,9 @@
 
 import { useState } from 'react';
 
-import Node from './Node.jsx';
+import {generateGridUI, isWall, isTargetNode, isVisited} from '../utils/utils.jsx';
 
-const isTargetNode = (targetNode, i, j) => {
-    return i == targetNode.row && j == targetNode.col;
-}
-
-const isWall = (i, j, walls) => {
-    return walls.has(JSON.stringify({i, j}));
-}
-
-const Grid = ({ walls, setWalls }) => {
+const Grid = ({ walls, setWalls, startNode, setStartNode, endNode, setEndNode, visitedNodes }) => {
 
     const nodeOnMouseDown = (i, j) => {
         if(isTargetNode(startNode, i, j))
@@ -47,51 +39,41 @@ const Grid = ({ walls, setWalls }) => {
             setDragWall(false);
     }
 
+    /* Generating the Grid */
     let grid = [];
-
-    const [startNode, setStartNode] = useState({
-        'row': 10, 
-        'col': 5
-    });
-
-    const [endNode, setEndNode] = useState({
-        'row': 10, 
-        'col': 40
-    });
-    
-    const [dragStart, setDragStart] = useState(false);
-    const [dragEnd, setDragEnd] = useState(false);
-    const [dragWall, setDragWall] = useState(false);
-
-    /* Creating the Grid */
     for(let i = 0; i < 30; ++i)
     {
         let row = [];
         for(let j = 0; j < 45; ++j)
         {
-            console.log(isWall(i, j, walls));
-            row.push(<Node row={i} col = {j} 
-                start = {isTargetNode(startNode, i, j)}
-                end = {isTargetNode(endNode, i, j)}
-                wall = {isWall(i, j, walls)}
-                onMouseDown={nodeOnMouseDown}
-                onMouseEnter= {nodeOnMouseEnter}
-                onMouseUp = {nodeOnMouseUp}
-                />)
+            row.push({
+                'row': i,
+                'col': j,
+                'isStart': isTargetNode(startNode, i, j),
+                'isEnd': isTargetNode(endNode, i, j),
+                'isWall': isWall(i, j, walls),
+                'onMouseDown': nodeOnMouseDown,
+                'onMouseEnter': nodeOnMouseEnter,
+                'onMouseUp': nodeOnMouseUp,
+                'isVisited': isVisited(i, j, visitedNodes)
+            } ) ;
         }
-        grid.push(<div className='flex'>
-            {row}
-        </div>
-        );
+        grid.push(row);
     }
 
-  return (
-    <div className='flex'>
-        <div className='m-auto flex-col'>
-            { grid }
+    console.log(visitedNodes);
+    
+    const [dragStart, setDragStart] = useState(false);
+    const [dragEnd, setDragEnd] = useState(false);
+    const [dragWall, setDragWall] = useState(false);
+
+    return (
+        <div className='flex'>
+            <div className='m-auto flex-col'>
+                { generateGridUI(grid) }
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
-export default Grid
+export default Grid;
