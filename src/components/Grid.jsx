@@ -11,7 +11,6 @@ const isWall = (i, j, walls) => {
 }
 
 const Grid = () => {
-
     const nodeOnMouseDown = (i, j) => {
         if(isTargetNode(startNode, i, j))
             setDragStart(true);
