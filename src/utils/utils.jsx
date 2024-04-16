@@ -43,15 +43,6 @@ const generateGridUI = ((grid) => {
     return gridUI;
 });
 
-const getPath = (startNode, endNode, path) => {
-    let pathOrder = [];
-    while(path[JSON.stringify(endNode)])
-    {
-        endNode = path[JSON.stringify(endNode)];
-        if(JSON.stringify(endNode) == JSON.stringify(startNode)) break;
-        pathOrder = [endNode, ...pathOrder];
-    }
-    return pathOrder;
-};
 
-export { generateGridUI, isWall, isTargetNode, isVisited, getPath };
+
+export { generateGridUI, isWall, isTargetNode, isVisited };

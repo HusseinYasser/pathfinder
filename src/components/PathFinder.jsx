@@ -2,14 +2,14 @@ import { useState } from 'react';
 import Grid from './Grid';
 import Navbar from './Navbar';
 import bfs from '../algorithms/bfs';  
-import { getPath } from '../utils/utils';
+import { visualizePath, getPath, instantPath } from '../utils/path_functions';
 
 const PathFinder = () => {
     
     const [walls, setWalls] = useState(new Set());
     const [visitedNodes, setVisitedNodes] = useState([]);
-    const [path, setPath] = useState([]);
-
+    const [path, setPath] = useState([]); 
+    const [appliedFinder, setAppliedFinder] = useState(false);
     //to lock the behavior of playing woth the grid while generating the path
     const [lockGrid, setLockGrid] = useState(false);
 
@@ -23,34 +23,38 @@ const PathFinder = () => {
         'col': 40
     });
 
-    const visualize = () => {
+    const dragTerminalNodes = ( newNode, isStartNode ) => {
+        isStartNode? setStartNode(newNode) : setEndNode(newNode);
+        
+        //update the path instantly
+        if(appliedFinder)
+            find_path(true);
+    }
+
+    const find_path = ( updating ) => {
         let { visitedInOrder, pathInOrder } = bfs(30, 45, walls, startNode, endNode);
         pathInOrder = getPath(startNode, endNode, pathInOrder);
         setLockGrid(true);
         setVisitedNodes([]);
         setPath([]);
-        for(let i = 0; i < visitedInOrder.length; ++i)
+        if(updating)
         {
-            setTimeout(() => {
-                setVisitedNodes(prev => [...prev, JSON.stringify(visitedInOrder[i]) ]);
-            }, 50*i);
+            instantPath(visitedInOrder, pathInOrder, setVisitedNodes, setPath);
+            setLockGrid(false);
         }
-
-        for(let i = 0; i < pathInOrder.length; ++i)
-        {
-            setTimeout(() => {
-                setPath(prev => [...prev, JSON.stringify(pathInOrder[i]) ]);
-            }, 50*(i+visitedInOrder.length));
+        else{
+            setAppliedFinder(true);
+            visualizePath(visitedInOrder, pathInOrder, setVisitedNodes, setPath, setLockGrid);
+            setTimeout(() => setLockGrid(false), (pathInOrder.length  + visitedInOrder.length) * 50);
         }
-        setTimeout(() => setLockGrid(false), (pathInOrder.length  + visitedInOrder.length) * 50);
     }
 
     
   return (
     <>
-        <Navbar visualize={visualize} />
+        <Navbar visualize={() => find_path(false)} />
         <Grid walls = {walls} setWalls = {setWalls} 
-            startNode={startNode} endNode={endNode} setStartNode={setStartNode} setEndNode={setEndNode}
+            startNode={startNode} endNode={endNode} setStartNode={(nwNode) => {dragTerminalNodes(nwNode, true)}} setEndNode={(nwNdode) => {dragTerminalNodes(nwNdode, false)}}
             visitedNodes = {new Set(visitedNodes)}
             path = {new Set(path)}
             locked = {lockGrid} />
