@@ -3,8 +3,8 @@
 // eslint-disable-next-line react/prop-types
 const Node = ({ row, col, start, end, wall, onMouseDown, onMouseEnter, onMouseUp, visited, isPath }) => {
 
-    let nodeColor = wall ? 'bg-blue-700' : 'bg-white';
-    nodeColor = visited? 'bg-orange-500' : nodeColor;
+    let nodeColor = visited? 'bg-orange-500' : 'bg-white';
+    nodeColor = wall? 'bg-blue-500' : nodeColor;
     nodeColor = end ? 'bg-green-500' : nodeColor;
     nodeColor = start ? 'bg-red-700' : nodeColor;
     nodeColor = isPath ? 'bg-yellow-500' : nodeColor;

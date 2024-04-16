@@ -2,9 +2,11 @@
 import { useState } from 'react';
 import {generateGridUI, isWall, isTargetNode, isVisited} from '../utils/utils.jsx';
 
-const Grid = ({ walls, setWalls, startNode, setStartNode, endNode, setEndNode, visitedNodes, path }) => {
+const Grid = ({ walls, setWalls, startNode, setStartNode, endNode, setEndNode, visitedNodes, path, locked }) => {
 
     const nodeOnMouseDown = (i, j) => {
+        if(locked)
+            return;
         if(isTargetNode(startNode, i, j))
             setDragStart(true);
         else if(isTargetNode(endNode, i, j))
@@ -14,6 +16,8 @@ const Grid = ({ walls, setWalls, startNode, setStartNode, endNode, setEndNode, v
     }
 
     const nodeOnMouseEnter = (i, j) => {
+        if(locked)
+            return;
         if(dragStart && JSON.stringify(endNode) != JSON.stringify({'row': i, 'col': j})){
             setStartNode({'row': i, 'col': j});
         }
@@ -29,6 +33,8 @@ const Grid = ({ walls, setWalls, startNode, setStartNode, endNode, setEndNode, v
     }
 
     const nodeOnMouseUp = () => {
+        if(locked)
+            return;
         if(dragEnd)
             setDragEnd(false);
         else if(dragStart)

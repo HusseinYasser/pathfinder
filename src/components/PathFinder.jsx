@@ -9,6 +9,10 @@ const PathFinder = () => {
     const [walls, setWalls] = useState(new Set());
     const [visitedNodes, setVisitedNodes] = useState([]);
     const [path, setPath] = useState([]);
+
+    //to lock the behavior of playing woth the grid while generating the path
+    const [lockGrid, setLockGrid] = useState(false);
+
     const [startNode, setStartNode] = useState({
         'row': 10, 
         'col': 5
@@ -21,9 +25,10 @@ const PathFinder = () => {
 
     const visualize = () => {
         let { visitedInOrder, pathInOrder } = bfs(30, 45, walls, startNode, endNode);
-        console.log(pathInOrder)
         pathInOrder = getPath(startNode, endNode, pathInOrder);
-        console.log(pathInOrder);
+        setLockGrid(true);
+        setVisitedNodes([]);
+        setPath([]);
         for(let i = 0; i < visitedInOrder.length; ++i)
         {
             setTimeout(() => {
@@ -33,13 +38,13 @@ const PathFinder = () => {
 
         for(let i = 0; i < pathInOrder.length; ++i)
         {
-            console.log(pathInOrder[i]);
             setTimeout(() => {
                 setPath(prev => [...prev, JSON.stringify(pathInOrder[i]) ]);
             }, 50*(i+visitedInOrder.length));
         }
-
+        setTimeout(() => setLockGrid(false), (pathInOrder.length  + visitedInOrder.length) * 50);
     }
+
     
   return (
     <>
@@ -47,7 +52,8 @@ const PathFinder = () => {
         <Grid walls = {walls} setWalls = {setWalls} 
             startNode={startNode} endNode={endNode} setStartNode={setStartNode} setEndNode={setEndNode}
             visitedNodes = {new Set(visitedNodes)}
-            path = {new Set(path)} />
+            path = {new Set(path)}
+            locked = {lockGrid} />
     </>
   )
 }
