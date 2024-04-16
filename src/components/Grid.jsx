@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
-
 import { useState } from 'react';
-
 import {generateGridUI, isWall, isTargetNode, isVisited} from '../utils/utils.jsx';
 
-const Grid = ({ walls, setWalls, startNode, setStartNode, endNode, setEndNode, visitedNodes }) => {
+const Grid = ({ walls, setWalls, startNode, setStartNode, endNode, setEndNode, visitedNodes, path }) => {
 
     const nodeOnMouseDown = (i, j) => {
         if(isTargetNode(startNode, i, j))
@@ -55,18 +53,15 @@ const Grid = ({ walls, setWalls, startNode, setStartNode, endNode, setEndNode, v
                 'onMouseDown': nodeOnMouseDown,
                 'onMouseEnter': nodeOnMouseEnter,
                 'onMouseUp': nodeOnMouseUp,
-                'isVisited': isVisited(i, j, visitedNodes)
+                'isVisited': isVisited(i, j, visitedNodes),
+                'isPath': isVisited(i, j, path)
             } ) ;
         }
         grid.push(row);
     }
-
-    console.log(visitedNodes);
-    
     const [dragStart, setDragStart] = useState(false);
     const [dragEnd, setDragEnd] = useState(false);
     const [dragWall, setDragWall] = useState(false);
-
     return (
         <div className='flex'>
             <div className='m-auto flex-col'>

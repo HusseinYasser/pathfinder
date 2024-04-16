@@ -1,4 +1,3 @@
-
 import { isWall } from '../utils/utils';
 
 const dirX = [-1, 1, 0, 0];
@@ -13,13 +12,13 @@ const bfs = (rows, cols, walls, startNode, endNode) => {
     dis[JSON.stringify(startNode)] = 0;
     let queue = [];
     queue.push(startNode);
-    let visitedNodes = [];
-
+    let visitedInOrder = [];
+    let pathInOrder = {};
     while(queue.length > 0)
     {
         let currNode = queue.shift();
         //this node is visited here
-        visitedNodes.push(currNode);
+        visitedInOrder.push(currNode);
 
         if(JSON.stringify(currNode) == JSON.stringify(endNode))
             break;
@@ -34,10 +33,11 @@ const bfs = (rows, cols, walls, startNode, endNode) => {
                 //new node has to be added
                 queue.push(newNode);
                 dis[JSON.stringify(newNode)] = dis[currNode] + 1;
+                pathInOrder[JSON.stringify(newNode)] = currNode;
             }
         })
     }
-    return visitedNodes;
+    return { visitedInOrder, pathInOrder };
 };
 
 

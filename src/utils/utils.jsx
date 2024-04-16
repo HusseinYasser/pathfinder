@@ -32,6 +32,7 @@ const generateGridUI = ((grid) => {
                 onMouseEnter={node.onMouseEnter}
                 onMouseUp={node.onMouseUp}
                 visited={node.isVisited}
+                isPath={node.isPath}
             />);
         }
         gridUI.push(<div className='flex' key = {i}>
@@ -42,4 +43,15 @@ const generateGridUI = ((grid) => {
     return gridUI;
 });
 
-export { generateGridUI, isWall, isTargetNode, isVisited };
+const getPath = (startNode, endNode, path) => {
+    let pathOrder = [];
+    while(path[JSON.stringify(endNode)])
+    {
+        endNode = path[JSON.stringify(endNode)];
+        if(JSON.stringify(endNode) == JSON.stringify(startNode)) break;
+        pathOrder = [endNode, ...pathOrder];
+    }
+    return pathOrder;
+};
+
+export { generateGridUI, isWall, isTargetNode, isVisited, getPath };
