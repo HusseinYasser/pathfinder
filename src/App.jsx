@@ -5,9 +5,6 @@ function App() {
   return (
     <>
       <div>
-        PathFinding Algos
-      </div>
-      <div>
         <PathFinder />
       </div>
     </>
