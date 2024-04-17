@@ -3,6 +3,7 @@ import Grid from './Grid';
 import Navbar from './Navbar'; 
 import { PathFinderContext } from '../algorithms/pathFinderStrategy';
 import { BFS } from '../algorithms/bfs';
+import { mapSpeed } from '../utils/utils';  
 
 const PathFinder = () => {
     
@@ -10,6 +11,8 @@ const PathFinder = () => {
     const [visitedNodes, setVisitedNodes] = useState([]);
     const [path, setPath] = useState([]); 
     const [appliedFinder, setAppliedFinder] = useState(false);
+    const[speed, setSpeed] = useState('Fast');
+
     //to lock the behavior of playing woth the grid while generating the path
     const [lockGrid, setLockGrid] = useState(false);
 
@@ -32,7 +35,7 @@ const PathFinder = () => {
     }
 
     const visualize = ( updating ) => {
-        const pathFinder = new PathFinderContext(new BFS(), setVisitedNodes, setPath, updating);
+        const pathFinder = new PathFinderContext(new BFS(), setVisitedNodes, setPath, updating, mapSpeed(speed));
         const delayTime = pathFinder.findPath(30, 45, walls, startNode, endNode);
         if(!updating) {
             setAppliedFinder(true);
@@ -67,7 +70,8 @@ const PathFinder = () => {
     
   return (
     <>
-        <Navbar visualize={() => visualize(false)} findingPath={appliedFinder} clearBoard = {clearBoard} clearPath = {clearPath} clearWalls = {clearWalls} />
+        <Navbar visualize={() => visualize(false)} findingPath={appliedFinder} clearBoard = {clearBoard} clearPath = {clearPath} clearWalls = {clearWalls}
+        speed={speed} setSpeed = {setSpeed} />
         <Grid walls = {walls} setWalls = {setWalls} 
             startNode={startNode} endNode={endNode} setStartNode={(nwNode) => {dragTerminalNodes(nwNode, true)}} setEndNode={(nwNdode) => {dragTerminalNodes(nwNdode, false)}}
             visitedNodes = {new Set(visitedNodes)}

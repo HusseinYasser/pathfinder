@@ -7,12 +7,13 @@ class PathFinderStrategy
 
 class PathFinderContext 
 {
-    constructor(strategy, setVisitedNodes, setPath, isInstantVis)
+    constructor(strategy, setVisitedNodes, setPath, isInstantVis, speed)
     {
         this.strategy = strategy;
         this.isInstantVis = isInstantVis;
         this.setPath = setPath;
         this.setVisitedNodes = setVisitedNodes;
+        this.speed = speed;
     }
 
     findPath(rows, cols, walls, startNode, endNode)
@@ -52,14 +53,14 @@ class PathFinderContext
         {
             setTimeout(() => {
                 this.setVisitedNodes(prev => [...prev, JSON.stringify(visitedInOrder[i]) ]);
-            }, 50*i);
+            }, this.speed*i);
         }
     
         for(let i = 0; i < pathInOrder.length; ++i)
         {
             setTimeout(() => {
                 this.setPath(prev => [...prev, JSON.stringify(pathInOrder[i]) ]);
-            }, 50*(i+visitedInOrder.length));
+            }, this.speed*(i+visitedInOrder.length));
         }
     }
     

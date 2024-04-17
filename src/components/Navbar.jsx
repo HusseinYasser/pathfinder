@@ -1,8 +1,9 @@
 import { IoMdArrowDropdown } from "react-icons/io";
 import { useState } from 'react';
+import { RiCloseLine } from "react-icons/ri";
 
 // eslint-disable-next-line react/prop-types
-const Navbar = ({ visualize, findingPath, clearBoard, clearWalls, clearPath }) => {
+const Navbar = ({ visualize, findingPath, clearBoard, clearWalls, clearPath, speed, setSpeed }) => {
 
   const tabsClass = "hover:text-lightblue cursor-pointer flex items-center space select-none";
   const iconClass = "text-xl mt-1.5";
@@ -10,16 +11,44 @@ const Navbar = ({ visualize, findingPath, clearBoard, clearWalls, clearPath }) =
   const dropDownItemClass = `${findingPath? "hover:bg-gray-400":"hover:bg-lightblue"} text-white text-poppins text-sm rounded p-3 cursor-pointer select-none`;
 
   const [showAlgoMenus, setShowAlgoMenus] = useState(false);
+  const [showSpeedMenus, setShowSpeedMenus] = useState(false);
 
-  const algorithmsMenus = (<div className = 'flex-col bg-darkblue absolute top-18 rounded py-3 px-2'>
-      <div className = {dropDownItemClass} disabled={findingPath} onClick={()=> {
-        if(!findingPath) console.log("BFFFSS"); 
-      }}> Breadth-first search </div>
-      <div className = {dropDownItemClass} > Depth-first search </div>
-      <div className = {dropDownItemClass} > Disjesktra algorithm </div>
-      <div className = {dropDownItemClass} > A* algorithm </div>
-      <div className = {dropDownItemClass} > Greedy best-first search </div>
-  </div>);
+  const algorithmsMenus = (
+    <div className = 'flex-col bg-darkblue absolute top-18 rounded py-3 px-2'>
+        <div className="w-100 flex justify-end"> 
+          <RiCloseLine className="cursor-pointer hover:text-lightblue"
+            onClick={() => setShowAlgoMenus(false)}
+          /> 
+        </div>
+        <div className = {dropDownItemClass} disabled={findingPath} onClick={()=> {
+          if(!findingPath) console.log("BFFFSS"); 
+        }}> Breadth-first search </div>
+        <div className = {dropDownItemClass} > Depth-first search </div>
+        <div className = {dropDownItemClass} > Disjesktra algorithm </div>
+        <div className = {dropDownItemClass} > A* algorithm </div>
+        <div className = {dropDownItemClass} > Greedy best-first search </div>
+    </div>
+  );
+
+  const speedMenus = (
+    <div className = 'flex-col bg-darkblue absolute top-18 rounded py-3 px-2'>
+        <div className="w-100 flex justify-end"> 
+          <RiCloseLine className="cursor-pointer hover:text-lightblue"
+            onClick={() => setShowSpeedMenus(false)}
+          /> 
+        </div>
+        <div className = {dropDownItemClass} onClick={()=>changeSpeed('Slow')}> Slow </div>
+        <div className = {dropDownItemClass} onClick={()=>changeSpeed('Medium')} > Medium </div>
+        <div className = {dropDownItemClass} onClick={()=>changeSpeed('Fast')} > Fast </div>
+    </div>
+  );
+
+  const changeSpeed = (chosenSpeed) => {
+      if(findingPath)
+        return;
+      setSpeed(chosenSpeed);
+      setShowSpeedMenus(false);
+  }
 
   return (
     <div className = 'flex justify-around bg-darkblue text-poppins text-white h-16 items-center font-semibold'>
@@ -52,8 +81,9 @@ const Navbar = ({ visualize, findingPath, clearBoard, clearWalls, clearPath }) =
           Clear Path
         </div>
 
-        <div className={tabsClass}>
-          Speed <IoMdArrowDropdown className = {iconClass} />
+        <div>
+          <div className={tabsClass} onClick={() => setShowSpeedMenus(prev => !prev)}> Speed: {speed} <IoMdArrowDropdown className = {iconClass} /> </div>
+          { showSpeedMenus && speedMenus }
         </div>
 
     </div>

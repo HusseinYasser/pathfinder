@@ -43,6 +43,11 @@ const generateGridUI = ((grid) => {
     return gridUI;
 });
 
+const mapSpeed = (speed) => {
+    if(speed == 'Slow') return 100;
+    else if(speed == 'Medium') return 50;
+    else return 20;
+}
 
 
-export { generateGridUI, isWall, isTargetNode, isVisited };
+export { generateGridUI, isWall, isTargetNode, isVisited, mapSpeed };
