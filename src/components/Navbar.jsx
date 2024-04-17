@@ -1,17 +1,20 @@
 import { IoMdArrowDropdown } from "react-icons/io";
 import { useState } from 'react';
 
-const Navbar = ({ visualize, findingPath }) => {
+// eslint-disable-next-line react/prop-types
+const Navbar = ({ visualize, findingPath, clearBoard, clearWalls, clearPath }) => {
 
   const tabsClass = "hover:text-lightblue cursor-pointer flex items-center space select-none";
   const iconClass = "text-xl mt-1.5";
 
-  const dropDownItemClass = "hover:bg-lightblue text-white text-poppins text-sm rounded p-3 cursor-pointer select-none";
+  const dropDownItemClass = `${findingPath? "hover:bg-gray-400":"hover:bg-lightblue"} text-white text-poppins text-sm rounded p-3 cursor-pointer select-none`;
 
   const [showAlgoMenus, setShowAlgoMenus] = useState(false);
 
   const algorithmsMenus = (<div className = 'flex-col bg-darkblue absolute top-18 rounded py-3 px-2'>
-      <div className = {dropDownItemClass} > Breadth-first search </div>
+      <div className = {dropDownItemClass} disabled={findingPath} onClick={()=> {
+        if(!findingPath) console.log("BFFFSS"); 
+      }}> Breadth-first search </div>
       <div className = {dropDownItemClass} > Depth-first search </div>
       <div className = {dropDownItemClass} > Disjesktra algorithm </div>
       <div className = {dropDownItemClass} > A* algorithm </div>
@@ -33,19 +36,19 @@ const Navbar = ({ visualize, findingPath }) => {
           Mazes & Patterns <IoMdArrowDropdown className = {iconClass} />
         </div>
 
-        <button className={`bg-${findingPath? "gray-400":"lightblue"} py-2 px-5 rounded font-normal ${findingPath && "text-black"}`} onClick={visualize} disabled={findingPath} >
+        <button className={`${findingPath? "bg-gray-400":"bg-lightblue"} py-2 px-5 rounded font-normal ${findingPath && "text-black"}`} onClick={visualize} disabled={findingPath} >
           Visualize BFS
         </button>
 
-        <div className={tabsClass}>
+        <div className={tabsClass + " " + `${findingPath? "hover:text-red-500":"hover:text-lightblue"}`} onClick = { () => {if(!findingPath) clearBoard()} }>
           Clear Board
         </div>
 
-        <div className={tabsClass}>
+        <div className={tabsClass + " " + `${findingPath? "hover:text-red-500":"hover:text-lightblue"}`} onClick = { () => {if(!findingPath) clearWalls()} } >
           Clear Walls & Weights
         </div>
 
-        <div className={tabsClass}>
+        <div className={tabsClass + " " + `${findingPath? "hover:text-red-500":"hover:text-lightblue"}`} onClick = { () => {if(!findingPath) clearPath()} } >
           Clear Path
         </div>
 

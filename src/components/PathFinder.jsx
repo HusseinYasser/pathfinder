@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Grid from './Grid';
-import Navbar from './Navbar';
-import bfs from '../algorithms/bfs';  
-import { visualizePath, getPath, instantPath } from '../utils/path_functions';
+import Navbar from './Navbar'; 
+import { PathFinderContext } from '../algorithms/pathFinderStrategy';
+import { BFS } from '../algorithms/bfs';
 
 const PathFinder = () => {
     
@@ -25,35 +25,49 @@ const PathFinder = () => {
 
     const dragTerminalNodes = ( newNode, isStartNode ) => {
         isStartNode? setStartNode(newNode) : setEndNode(newNode);
-        
+        console.log('MOVING ' + appliedFinder );
         //update the path instantly
-        if(appliedFinder)
-            find_path(true);
+        if(visitedNodes.length)
+            visualize(true);
     }
 
-    const find_path = ( updating ) => {
-        let { visitedInOrder, pathInOrder } = bfs(30, 45, walls, startNode, endNode);
-        pathInOrder = getPath(startNode, endNode, pathInOrder);
-        setLockGrid(true);
-        setVisitedNodes([]);
-        setPath([]);
-        if(updating)
-        {
-            instantPath(visitedInOrder, pathInOrder, setVisitedNodes, setPath);
-            setLockGrid(false);
-        }
-        else{
+    const visualize = ( updating ) => {
+        const pathFinder = new PathFinderContext(new BFS(), setVisitedNodes, setPath, updating);
+        const delayTime = pathFinder.findPath(30, 45, walls, startNode, endNode);
+        if(!updating) {
             setAppliedFinder(true);
-            visualizePath(visitedInOrder, pathInOrder, setVisitedNodes, setPath, setLockGrid);
-            setTimeout(() => setLockGrid(false), (pathInOrder.length  + visitedInOrder.length) * 50);
-            setTimeout(() => setAppliedFinder(false), (pathInOrder.length  + visitedInOrder.length) * 50)
+            setLockGrid(true);
+            setTimeout(() => setLockGrid(false), delayTime * 50);
+            setTimeout(() => setAppliedFinder(false), delayTime * 50)
         }
+    }
+
+    const clearPath = () => {
+        setPath([]);
+        setVisitedNodes([]);
+    }
+
+    const clearWalls = () => {
+        setWalls(new Set());
+    }
+
+    const clearBoard = () => {
+        clearPath();
+        clearWalls();
+        setStartNode({
+            'row': 10, 
+            'col': 5
+        });
+        setEndNode({
+            'row': 10, 
+            'col': 40
+        });
     }
 
     
   return (
     <>
-        <Navbar visualize={() => find_path(false)} findingPath={appliedFinder} />
+        <Navbar visualize={() => visualize(false)} findingPath={appliedFinder} clearBoard = {clearBoard} clearPath = {clearPath} clearWalls = {clearWalls} />
         <Grid walls = {walls} setWalls = {setWalls} 
             startNode={startNode} endNode={endNode} setStartNode={(nwNode) => {dragTerminalNodes(nwNode, true)}} setEndNode={(nwNdode) => {dragTerminalNodes(nwNdode, false)}}
             visitedNodes = {new Set(visitedNodes)}
