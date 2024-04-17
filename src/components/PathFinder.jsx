@@ -46,13 +46,14 @@ const PathFinder = () => {
             setAppliedFinder(true);
             visualizePath(visitedInOrder, pathInOrder, setVisitedNodes, setPath, setLockGrid);
             setTimeout(() => setLockGrid(false), (pathInOrder.length  + visitedInOrder.length) * 50);
+            setTimeout(() => setAppliedFinder(false), (pathInOrder.length  + visitedInOrder.length) * 50)
         }
     }
 
     
   return (
     <>
-        <Navbar visualize={() => find_path(false)} />
+        <Navbar visualize={() => find_path(false)} findingPath={appliedFinder} />
         <Grid walls = {walls} setWalls = {setWalls} 
             startNode={startNode} endNode={endNode} setStartNode={(nwNode) => {dragTerminalNodes(nwNode, true)}} setEndNode={(nwNdode) => {dragTerminalNodes(nwNdode, false)}}
             visitedNodes = {new Set(visitedNodes)}
