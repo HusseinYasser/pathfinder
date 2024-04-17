@@ -40,8 +40,8 @@ const PathFinder = () => {
         if(!updating) {
             setAppliedFinder(true);
             setLockGrid(true);
-            setTimeout(() => setLockGrid(false), delayTime * 50);
-            setTimeout(() => setAppliedFinder(false), delayTime * 50)
+            setTimeout(() => setLockGrid(false), delayTime * mapSpeed(speed));
+            setTimeout(() => setAppliedFinder(false), delayTime * mapSpeed(speed))
         }
     }
 
