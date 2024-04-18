@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import {generateGridUI, isWall, isTargetNode, isVisited} from '../utils/utils.jsx';
 
-const Grid = ({ walls, setWalls, startNode, setStartNode, endNode, setEndNode, visitedNodes, path, locked }) => {
+const Grid = ({ walls, setWalls, startNode, setStartNode, endNode, setEndNode, visitedNodes, path, locked, animate }) => {
 
     const nodeOnMouseDown = (i, j) => {
         if(locked)
@@ -71,7 +71,7 @@ const Grid = ({ walls, setWalls, startNode, setStartNode, endNode, setEndNode, v
     return (
         <div className='flex'>
             <div className='m-auto flex-col'>
-                { generateGridUI(grid) }
+                { generateGridUI(grid, animate) }
             </div>
         </div>
     )

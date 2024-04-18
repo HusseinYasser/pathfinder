@@ -12,7 +12,7 @@ const isVisited = (i, j, visited) => {
     return visited.has(JSON.stringify({'row': i, 'col': j}));
 }
 
-const generateGridUI = ((grid) => {
+const generateGridUI = ((grid, animate) => {
     /* Creating the Grid UI */
     let gridUI = []
     for(let i = 0; i < 30; ++i)
@@ -33,6 +33,7 @@ const generateGridUI = ((grid) => {
                 onMouseUp={node.onMouseUp}
                 visited={node.isVisited}
                 isPath={node.isPath}
+                animate = {animate}
             />);
         }
         gridUI.push(<div className='flex' key = {i}>

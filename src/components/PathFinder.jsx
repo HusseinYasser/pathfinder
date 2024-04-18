@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Grid from './Grid';
 import Navbar from './Navbar'; 
 import { PathFinderContext } from '../algorithms/pathFinderStrategy';
@@ -26,12 +26,17 @@ const PathFinder = () => {
         'col': 40
     });
 
+    useEffect(() => {
+        // This effect runs after startNode or endNode has been updated
+        if (startNode || endNode) {
+          if (visitedNodes.length > 0) {
+            visualize(true);
+          }
+        }
+      }, [startNode, endNode]);
+    
     const dragTerminalNodes = ( newNode, isStartNode ) => {
         isStartNode? setStartNode(newNode) : setEndNode(newNode);
-        console.log('MOVING ' + appliedFinder );
-        //update the path instantly
-        if(visitedNodes.length)
-            visualize(true);
     }
 
     const visualize = ( updating ) => {
@@ -76,7 +81,8 @@ const PathFinder = () => {
             startNode={startNode} endNode={endNode} setStartNode={(nwNode) => {dragTerminalNodes(nwNode, true)}} setEndNode={(nwNdode) => {dragTerminalNodes(nwNdode, false)}}
             visitedNodes = {new Set(visitedNodes)}
             path = {new Set(path)}
-            locked = {lockGrid} />
+            locked = {lockGrid}
+            animate={appliedFinder} />
     </>
   )
 }

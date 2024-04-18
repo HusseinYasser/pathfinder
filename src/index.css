@@ -3,3 +3,64 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@keyframes fill {
+    0% {
+        transform: scale(0.5);
+    }
+    33% {
+        transform: scale(1);
+    }
+    66% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1); /* Change this to your desired color */
+    }
+  }
+
+  @keyframes visitedFill {
+    0% {
+        transform: scale(0);
+        background-color: #FFFE6A; /* Remove single quotes */
+      }
+    20% {
+      transform: scale(0.5);
+      border-radius: 5px;
+      background-color: #98ea61; /* Remove single quotes */
+    }
+    40% {
+      transform: scale(0.8);
+      border-radius: 5px;
+      background-color: #97ee88; /* Remove single quotes */
+    }
+    60% {
+      transform: scale(1.2);
+      border-radius: 5px;
+      background-color: rgb(104, 241, 228); /* Remove single quotes */
+    }
+    100% {
+        background-color: #40CEE3;
+        transform: scale(1);
+    }
+  }
+
+@keyframes pathFill {
+    0% {
+        background-color: #FFFE6A;
+        transform: scale(0.9);
+    }
+    33% {
+        background-color: #FFFE6A; /* Keep the color the same */
+        transform: scale(1);
+    }
+    66% {
+        background-color: #FFFE6A; /* Keep the color the same */
+        transform: scale(1.1);
+    }
+    100% {
+        background-color: #FFFE6A;
+        transform: scale(1);
+    }
+}

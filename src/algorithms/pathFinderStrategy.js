@@ -36,13 +36,14 @@ class PathFinderContext
     }
 
     getPath = (startNode, endNode, path) => {
-        let pathOrder = [];
+        let pathOrder = [endNode];
         while(path[JSON.stringify(endNode)])
         {
             endNode = path[JSON.stringify(endNode)];
-            if(JSON.stringify(endNode) == JSON.stringify(startNode)) break;
             pathOrder = [endNode, ...pathOrder];
         }
+        if(JSON.stringify(pathOrder[0]) != JSON.stringify(startNode))
+            return [];
         return pathOrder;
     };
     
