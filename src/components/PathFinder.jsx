@@ -23,7 +23,7 @@ const PathFinder = () => {
 
     const [endNode, setEndNode] = useState({
         'row': 10, 
-        'col': 40
+        'col': 35
     });
 
     useEffect(() => {
@@ -41,7 +41,7 @@ const PathFinder = () => {
 
     const visualize = ( updating ) => {
         const pathFinder = new PathFinderContext(new BFS(), setVisitedNodes, setPath, updating, mapSpeed(speed));
-        const delayTime = pathFinder.findPath(30, 45, walls, startNode, endNode);
+        const delayTime = pathFinder.findPath(38, 50, walls, startNode, endNode);
         if(!updating) {
             setAppliedFinder(true);
             setLockGrid(true);

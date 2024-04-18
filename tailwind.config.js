@@ -19,13 +19,17 @@ export default {
       fontFamily:
       {
         'poppins': 'Poppins'
+      },
+      width:
+      {
+        'cell': '2%'
       }
     },
     animation: {
       // Add your custom animations here
       fill: 'fill 0.2s forwards',
-      visitedFill: 'visitedFill 0.4s forwards',
-      pathFill: 'pathFill 0.6s forwards',
+      visitedFill: 'visitedFill 1s forwards',
+      pathFill: 'pathFill 1s forwards',
       'slide-in': 'slide-in 0.5s ease-out'
     },
   },

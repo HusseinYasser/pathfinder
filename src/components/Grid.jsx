@@ -48,7 +48,7 @@ const Grid = ({ walls, setWalls, startNode, setStartNode, endNode, setEndNode, v
     for(let i = 0; i < 30; ++i)
     {
         let row = [];
-        for(let j = 0; j < 45; ++j)
+        for(let j = 0; j < 50; ++j)
         {
             row.push({
                 'row': i,
@@ -69,8 +69,8 @@ const Grid = ({ walls, setWalls, startNode, setStartNode, endNode, setEndNode, v
     const [dragEnd, setDragEnd] = useState(false);
     const [dragWall, setDragWall] = useState(false);
     return (
-        <div className='flex'>
-            <div className='m-auto flex-col'>
+        <div className='flex w-full'>
+            <div className='m-auto flex-col w-full'>
                 { generateGridUI(grid, animate) }
             </div>
         </div>
