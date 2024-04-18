@@ -27,7 +27,7 @@ const InformationBanner = () => {
 
             <div className="flex space-x-3">
                 <div className="bg-path border w-6 h-6"/>
-                <label> Shortest Path </label>
+                <label> Algorithm Path </label>
             </div>
 
             <div className="flex space-x-3">
