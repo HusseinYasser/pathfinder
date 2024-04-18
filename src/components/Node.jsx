@@ -16,7 +16,7 @@ const Node = ({ row, col, start, end, wall, onMouseDown, onMouseEnter, onMouseUp
     let icon = '';
     if(start || isPath)
     {
-        icon = <GiAmericanFootballBall className={`${isPath&&!start ? "text-purple-500" : "text-lightgray"} w-full h-full`} />
+        icon = <GiAmericanFootballBall className={`${isPath&&!start ? "text-purple-800" : "text-lightgray"} w-full h-full`} />
     }
     if(end)
     {

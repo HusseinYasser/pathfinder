@@ -22,45 +22,39 @@
 
   @keyframes visitedFill {
     0% {
-        transform: scale(0);
-        background-color: #FFFE6A; /* Remove single quotes */
-      }
-    20% {
-      transform: scale(0.5);
-      border-radius: 5px;
-      background-color: #98ea61; /* Remove single quotes */
+      transform: scale(.3);
+      background-color: rgba(0, 0, 66, 0.75);
+      border-radius: 100%;
     }
-    40% {
-      transform: scale(0.8);
-      border-radius: 5px;
-      background-color: #97ee88; /* Remove single quotes */
+  
+    50% {
+      background-color: rgba(17, 104, 217, 0.75);
     }
-    60% {
+  
+    75% {
       transform: scale(1.2);
-      border-radius: 5px;
-      background-color: rgb(104, 241, 228); /* Remove single quotes */
+      background-color: rgba(0, 217, 159, 0.75);
     }
+  
     100% {
-        background-color: #40CEE3;
-        transform: scale(1);
+      transform: scale(1.0);
+      background-color: rgba(0, 190, 218, 0.75);
     }
-  }
+}
 
 @keyframes pathFill {
-    0% {
-        background-color: #FFFE6A;
-        transform: scale(0.9);
-    }
-    33% {
-        background-color: #FFFE6A; /* Keep the color the same */
-        transform: scale(1);
-    }
-    66% {
-        background-color: #FFFE6A; /* Keep the color the same */
-        transform: scale(1.1);
-    }
-    100% {
-        background-color: #FFFE6A;
-        transform: scale(1);
-    }
+  0% {
+    transform: scale(.6);
+    background-color: rgb(255, 254, 106);
+  }
+
+  50% {
+    transform: scale(1.2);
+    background-color: rgb(255, 254, 106);
+  }
+
+  100% {
+    transform: scale(1.0);
+    background-color: rgb(255, 254, 106);
+  }
 }
