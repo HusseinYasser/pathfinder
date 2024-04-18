@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import { PathFinderContext } from '../algorithms/pathFinderStrategy';
 import { BFS } from '../algorithms/bfs';
 import { mapSpeed } from '../utils/utils';  
+import InformationBanner from './InformationBanner';
 
 const PathFinder = () => {
     
@@ -77,6 +78,7 @@ const PathFinder = () => {
     <>
         <Navbar visualize={() => visualize(false)} findingPath={appliedFinder} clearBoard = {clearBoard} clearPath = {clearPath} clearWalls = {clearWalls}
         speed={speed} setSpeed = {setSpeed} />
+        <InformationBanner />
         <Grid walls = {walls} setWalls = {setWalls} 
             startNode={startNode} endNode={endNode} setStartNode={(nwNode) => {dragTerminalNodes(nwNode, true)}} setEndNode={(nwNdode) => {dragTerminalNodes(nwNdode, false)}}
             visitedNodes = {new Set(visitedNodes)}
