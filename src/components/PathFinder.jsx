@@ -13,6 +13,7 @@ const PathFinder = () => {
     const [path, setPath] = useState([]); 
     const [appliedFinder, setAppliedFinder] = useState(false);
     const[speed, setSpeed] = useState('Fast');
+    const [algo, setAlgo] = useState('');
 
     //to lock the behavior of playing woth the grid while generating the path
     const [lockGrid, setLockGrid] = useState(false);
@@ -28,11 +29,9 @@ const PathFinder = () => {
     });
 
     useEffect(() => {
-        // This effect runs after startNode or endNode has been updated
-        if (startNode || endNode) {
-          if (visitedNodes.length > 0) {
+        // This effect runs after startNode or endNode has been updated so we update the path instantly
+        if (visitedNodes.length > 0) {
             visualize(true);
-          }
         }
       }, [startNode, endNode]);
     
@@ -41,7 +40,7 @@ const PathFinder = () => {
     }
 
     const visualize = ( updating ) => {
-        const pathFinder = new PathFinderContext(new BFS(), setVisitedNodes, setPath, updating, mapSpeed(speed));
+        const pathFinder = new PathFinderContext(eval(`new ${algo}()`), setVisitedNodes, setPath, updating, mapSpeed(speed));
         const delayTime = pathFinder.findPath(27, 50, walls, startNode, endNode);
         if(!updating) {
             setAppliedFinder(true);
@@ -77,7 +76,7 @@ const PathFinder = () => {
   return (
     <>
         <Navbar visualize={() => visualize(false)} findingPath={appliedFinder} clearBoard = {clearBoard} clearPath = {clearPath} clearWalls = {clearWalls}
-        speed={speed} setSpeed = {setSpeed} />
+        speed={speed} setSpeed = {setSpeed} setAlgo={setAlgo} algo={algo} />
         <InformationBanner />
         <Grid walls = {walls} setWalls = {setWalls} 
             startNode={startNode} endNode={endNode} setStartNode={(nwNode) => {dragTerminalNodes(nwNode, true)}} setEndNode={(nwNdode) => {dragTerminalNodes(nwNdode, false)}}

@@ -1,9 +1,12 @@
+/* eslint-disable react/prop-types */
 import { IoMdArrowDropdown } from "react-icons/io";
 import { useState } from 'react';
 import { RiCloseLine } from "react-icons/ri";
+import { BFS } from '../algorithms/bfs';
 
 // eslint-disable-next-line react/prop-types
-const Navbar = ({ visualize, findingPath, clearBoard, clearWalls, clearPath, speed, setSpeed }) => {
+const Navbar = ({ visualize, findingPath, clearBoard, clearWalls, clearPath, speed, setSpeed, 
+                algo, setAlgo }) => {
 
   const tabsClass = "hover:text-lightblue cursor-pointer flex items-center space select-none";
   const iconClass = "text-xl mt-1.5";
@@ -20,9 +23,7 @@ const Navbar = ({ visualize, findingPath, clearBoard, clearWalls, clearPath, spe
             onClick={() => setShowAlgoMenus(false)}
           /> 
         </div>
-        <div className = {dropDownItemClass} disabled={findingPath} onClick={()=> {
-          if(!findingPath) console.log("BFFFSS"); 
-        }}> Breadth-first search </div>
+        <div className = {dropDownItemClass} disabled={findingPath} onClick={ () => changeAlgo(BFS.name)}> Breadth-first search </div>
         <div className = {dropDownItemClass} > Depth-first search </div>
         <div className = {dropDownItemClass} > Disjesktra algorithm </div>
         <div className = {dropDownItemClass} > A* algorithm </div>
@@ -43,6 +44,11 @@ const Navbar = ({ visualize, findingPath, clearBoard, clearWalls, clearPath, spe
     </div>
   );
 
+  const changeAlgo = (chosenAlgo) => {
+      setAlgo(chosenAlgo);
+      setShowAlgoMenus(false);
+  }
+  
   const changeSpeed = (chosenSpeed) => {
       if(findingPath)
         return;
@@ -66,7 +72,7 @@ const Navbar = ({ visualize, findingPath, clearBoard, clearWalls, clearPath, spe
         </div>
 
         <button className={`${findingPath? "bg-gray-400":"bg-lightblue"} py-2 px-5 rounded font-normal ${findingPath && "text-black"}`} onClick={visualize} disabled={findingPath} >
-          Visualize BFS
+          {algo == ''? 'Pick your algorithm': 'Visualize ' + algo}
         </button>
 
         <div className={tabsClass + " " + `${findingPath? "hover:text-red-500":"hover:text-lightblue"}`} onClick = { () => {if(!findingPath) clearBoard()} }>
