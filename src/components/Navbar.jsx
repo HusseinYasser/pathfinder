@@ -3,6 +3,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { useState } from 'react';
 import { RiCloseLine } from "react-icons/ri";
 import { BFS } from '../algorithms/bfs';
+import { DFS } from '../algorithms/dfs';
 
 // eslint-disable-next-line react/prop-types
 const Navbar = ({ visualize, findingPath, clearBoard, clearWalls, clearPath, speed, setSpeed, 
@@ -24,7 +25,7 @@ const Navbar = ({ visualize, findingPath, clearBoard, clearWalls, clearPath, spe
           /> 
         </div>
         <div className = {dropDownItemClass} disabled={findingPath} onClick={ () => changeAlgo(BFS.name)}> Breadth-first search </div>
-        <div className = {dropDownItemClass} > Depth-first search </div>
+        <div className = {dropDownItemClass} onClick={ () => changeAlgo(DFS.name)} > Depth-first search </div>
         <div className = {dropDownItemClass} > Disjesktra algorithm </div>
         <div className = {dropDownItemClass} > A* algorithm </div>
         <div className = {dropDownItemClass} > Greedy best-first search </div>

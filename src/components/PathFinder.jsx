@@ -3,6 +3,7 @@ import Grid from './Grid';
 import Navbar from './Navbar'; 
 import { PathFinderContext } from '../algorithms/pathFinderStrategy';
 import { BFS } from '../algorithms/bfs';
+import { DFS } from '../algorithms/dfs';
 import { mapSpeed } from '../utils/utils';  
 import InformationBanner from './InformationBanner';
 
@@ -15,7 +16,7 @@ const PathFinder = () => {
     const[speed, setSpeed] = useState('Fast');
     const [algo, setAlgo] = useState('');
 
-    //to lock the behavior of playing woth the grid while generating the path
+    //to lock the behavior of playing woth the grid while generating the paths
     const [lockGrid, setLockGrid] = useState(false);
 
     const [startNode, setStartNode] = useState({
