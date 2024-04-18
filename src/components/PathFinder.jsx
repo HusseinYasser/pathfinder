@@ -42,7 +42,7 @@ const PathFinder = () => {
 
     const visualize = ( updating ) => {
         const pathFinder = new PathFinderContext(new BFS(), setVisitedNodes, setPath, updating, mapSpeed(speed));
-        const delayTime = pathFinder.findPath(38, 50, walls, startNode, endNode);
+        const delayTime = pathFinder.findPath(27, 50, walls, startNode, endNode);
         if(!updating) {
             setAppliedFinder(true);
             setLockGrid(true);

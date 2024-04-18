@@ -45,7 +45,7 @@ const Grid = ({ walls, setWalls, startNode, setStartNode, endNode, setEndNode, v
 
     /* Generating the Grid */
     let grid = [];
-    for(let i = 0; i < 30; ++i)
+    for(let i = 0; i < 27; ++i)
     {
         let row = [];
         for(let j = 0; j < 50; ++j)

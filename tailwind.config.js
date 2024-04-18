@@ -22,7 +22,8 @@ export default {
       },
       width:
       {
-        'cell': '2%'
+        'cell': '2%',
+        'gridWidth': '97%',
       }
     },
     animation: {

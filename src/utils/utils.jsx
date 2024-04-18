@@ -15,7 +15,7 @@ const isVisited = (i, j, visited) => {
 const generateGridUI = ((grid, animate) => {
     /* Creating the Grid UI */
     let gridUI = []
-    for(let i = 0; i < 28; ++i)
+    for(let i = 0; i < 27; ++i)
     {
         let row = [];
         for(let j = 0; j < 50; ++j)
@@ -36,7 +36,7 @@ const generateGridUI = ((grid, animate) => {
                 animate = {animate}
             />);
         }
-        gridUI.push(<div className='flex w-full' key = {i}>
+        gridUI.push(<div className='flex w-gridWidth m-auto' key = {i}>
             {row}
         </div>
         );
