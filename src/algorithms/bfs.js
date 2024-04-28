@@ -1,4 +1,4 @@
-import { isWall } from '../utils/utils';
+import { isFoundIn } from '../utils/utils';
 import { PathFinderStrategy }  from './pathFinderStrategy';
 
 class BFS extends PathFinderStrategy
@@ -35,7 +35,7 @@ class BFS extends PathFinderStrategy
                 let newY = currNode.col + this.dirY[idx];
                 let newNode = {'row': newX, 'col': newY};
                 if(this.isValid(newX, newY, rows, cols) && !Object.prototype.hasOwnProperty.call(dis, JSON.stringify(newNode)) 
-            && !isWall(newX, newY, walls))
+            && !isFoundIn(newX, newY, walls))
                 {
                     //new node has to be added
                     queue.push(newNode);

@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
-import {generateGridUI, isWall, isTargetNode, isVisited} from '../utils/utils.jsx';
+import { useState, useEffect } from 'react';
+import {generateGridUI, isTargetNode, isVisited, isFoundIn} from '../utils/utils.jsx';
 
-const Grid = ({ walls, setWalls, startNode, setStartNode, endNode, setEndNode, visitedNodes, path, locked, animate }) => {
+const Grid = ({ walls, setWalls, weights, setWeights, startNode, setStartNode, endNode, setEndNode, visitedNodes, path, locked, animate }) => {
 
     const nodeOnMouseDown = (i, j) => {
         if(locked)
@@ -27,8 +27,19 @@ const Grid = ({ walls, setWalls, startNode, setStartNode, endNode, setEndNode, v
         }
         else if(dragWall)
         {
-            walls.add(JSON.stringify({i, j}));
-            setWalls(new Set(walls));
+            if(JSON.stringify(endNode) == JSON.stringify({'row': i, 'col': j})
+                || JSON.stringify(startNode) == JSON.stringify({'row': i, 'col': j})
+                || isFoundIn(i, j, walls) || isFoundIn(i, j, weights))
+                    return;
+            if(addingWeights){
+                weights.add(JSON.stringify({i, j}));
+                setWeights(new Set(weights));
+            }
+            else
+            {
+                walls.add(JSON.stringify({i, j}));
+                setWalls(new Set(walls));
+            }
         }
     }
 
@@ -55,7 +66,8 @@ const Grid = ({ walls, setWalls, startNode, setStartNode, endNode, setEndNode, v
                 'col': j,
                 'isStart': isTargetNode(startNode, i, j),
                 'isEnd': isTargetNode(endNode, i, j),
-                'isWall': isWall(i, j, walls),
+                'isWall': isFoundIn(i, j, walls),
+                'isWeight': isFoundIn(i, j, weights),
                 'onMouseDown': nodeOnMouseDown,
                 'onMouseEnter': nodeOnMouseEnter,
                 'onMouseUp': nodeOnMouseUp,
@@ -68,9 +80,29 @@ const Grid = ({ walls, setWalls, startNode, setStartNode, endNode, setEndNode, v
     const [dragStart, setDragStart] = useState(false);
     const [dragEnd, setDragEnd] = useState(false);
     const [dragWall, setDragWall] = useState(false);
+    const [addingWeights, setAddingWeights] = useState(false);
+    
+
+    const startAddingWeights = (event) => {
+        if(event.key == 'w'){
+            setAddingWeights(true);
+            console.log('A5eram')
+        }
+    }
+
+    const finishAddingWeights = (event) => {
+        if(event.key == 'w')
+            setAddingWeights(false);
+    }
+
+    useEffect(() => {
+        document.addEventListener("keydown", startAddingWeights);
+        document.addEventListener("keyup", finishAddingWeights);
+    }, []);
+
     return (
         <div className='flex w-full'>
-            <div className='m-auto flex-col w-full'>
+            <div className='m-auto flex-col w-full' >
                 { generateGridUI(grid, animate) }
             </div>
         </div>

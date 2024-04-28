@@ -1,4 +1,4 @@
-import { isWall } from '../utils/utils';
+import { isFoundIn } from '../utils/utils';
 import { PathFinderStrategy }  from './pathFinderStrategy';
 
 class DFS extends PathFinderStrategy
@@ -21,7 +21,7 @@ class DFS extends PathFinderStrategy
             let newY = currNode.col + this.dirY[idx];
             let newNode = {'row': newX, 'col': newY};
             if(this.isValid(newX, newY, rows, cols) && !Object.prototype.hasOwnProperty.call(vis, JSON.stringify(newNode)) 
-                && !isWall(newX, newY, walls))
+                && !isFoundIn(newX, newY, walls))
             {
                 if(JSON.stringify(visitedInOrder[visitedInOrder.length-1]) == JSON.stringify(endNode))
                     return;

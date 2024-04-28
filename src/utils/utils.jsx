@@ -4,7 +4,7 @@ const isTargetNode = (targetNode, i, j) => {
     return i == targetNode.row && j == targetNode.col;
 }
 
-const isWall = (i, j, walls) => {
+const isFoundIn = (i, j, walls) => {
     return walls.has(JSON.stringify({i, j}));
 }
 
@@ -28,6 +28,7 @@ const generateGridUI = ((grid, animate) => {
                 start={node.isStart}
                 end={node.isEnd}
                 wall={node.isWall}
+                weight={node.isWeight}
                 onMouseDown={node.onMouseDown}
                 onMouseEnter={node.onMouseEnter}
                 onMouseUp={node.onMouseUp}
@@ -51,4 +52,4 @@ const mapSpeed = (speed) => {
 }
 
 
-export { generateGridUI, isWall, isTargetNode, isVisited, mapSpeed };
+export { generateGridUI, isFoundIn, isTargetNode, isVisited, mapSpeed };

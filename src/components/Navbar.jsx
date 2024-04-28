@@ -18,7 +18,7 @@ const Navbar = ({ visualize, findingPath, clearBoard, clearWalls, clearPath, spe
   const [showSpeedMenus, setShowSpeedMenus] = useState(false);
 
   const algorithmsMenus = (
-    <div className = 'flex-col bg-darkblue absolute top-18 rounded py-3 px-2'>
+    <div className = 'flex-col bg-darkblue absolute top-18 rounded py-3 px-2 z-10'>
         <div className="w-100 flex justify-end"> 
           <RiCloseLine className="cursor-pointer hover:text-lightblue"
             onClick={() => setShowAlgoMenus(false)}
@@ -33,7 +33,7 @@ const Navbar = ({ visualize, findingPath, clearBoard, clearWalls, clearPath, spe
   );
 
   const speedMenus = (
-    <div className = 'flex-col bg-darkblue absolute top-18 rounded py-3 px-2'>
+    <div className = 'flex-col bg-darkblue absolute top-18 rounded py-3 px-2 z-10'>
         <div className="w-100 flex justify-end"> 
           <RiCloseLine className="cursor-pointer hover:text-lightblue"
             onClick={() => setShowSpeedMenus(false)}

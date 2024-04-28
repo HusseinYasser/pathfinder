@@ -10,6 +10,7 @@ import InformationBanner from './InformationBanner';
 const PathFinder = () => {
     
     const [walls, setWalls] = useState(new Set());
+    const [weights, setWeights] = useState(new Set());
     const [visitedNodes, setVisitedNodes] = useState([]);
     const [path, setPath] = useState([]); 
     const [appliedFinder, setAppliedFinder] = useState(false);
@@ -80,6 +81,7 @@ const PathFinder = () => {
         speed={speed} setSpeed = {setSpeed} setAlgo={setAlgo} algo={algo} />
         <InformationBanner />
         <Grid walls = {walls} setWalls = {setWalls} 
+            weights = {weights} setWeights = {setWeights}
             startNode={startNode} endNode={endNode} setStartNode={(nwNode) => {dragTerminalNodes(nwNode, true)}} setEndNode={(nwNdode) => {dragTerminalNodes(nwNdode, false)}}
             visitedNodes = {new Set(visitedNodes)}
             path = {new Set(path)}

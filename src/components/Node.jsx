@@ -1,7 +1,8 @@
 import { GiAmericanFootballBall } from "react-icons/gi";
 import { GiAmericanFootballHelmet } from "react-icons/gi";
+import { FaWeightHanging } from "react-icons/fa";
 // eslint-disable-next-line react/prop-types
-const Node = ({ row, col, start, end, wall, onMouseDown, onMouseEnter, onMouseUp, visited, isPath, animate }) => {
+const Node = ({ row, col, start, end, wall, onMouseDown, onMouseEnter, onMouseUp, visited, isPath, animate, weight }) => {
 
     let nodeColor = visited? 'bg-visited' : 'bg-white';
     nodeColor = isPath? 'bg-path' : nodeColor;
@@ -15,6 +16,7 @@ const Node = ({ row, col, start, end, wall, onMouseDown, onMouseEnter, onMouseUp
     else if(visited)
       animations = "animate-visitedFill";
 
+    //console.log(weight)
     let icon = '';
     if(start || isPath)
     {
@@ -24,9 +26,11 @@ const Node = ({ row, col, start, end, wall, onMouseDown, onMouseEnter, onMouseUp
     {
       icon = <GiAmericanFootballHelmet className={`w-full h-full ${iconColor}`} />
     }
+    if(weight)
+      icon = <FaWeightHanging className={`w-full h-full ${iconColor}`}></FaWeightHanging>
 
   return (
-    <div className = {`w-cell h-7 border border-solid border-blue-200 ${nodeColor} ${wall && "animate-fill"} ${animate && animations}  ` } 
+    <div className = {`w-cell h-7 border border-solid border-blue-200 ${nodeColor} ${(wall||weight) && "animate-fill"} ${animate && animations}  ` } 
         onMouseDown={(ev) => { ev.preventDefault(); onMouseDown(row, col); }}
         onMouseEnter={(ev) => {ev.preventDefault(); onMouseEnter(row, col);}}
         onMouseUp={(ev) => {ev.preventDefault(); onMouseUp();}}
