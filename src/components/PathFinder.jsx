@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import { PathFinderContext } from '../algorithms/pathFinderStrategy';
 import { BFS } from '../algorithms/bfs';
 import { DFS } from '../algorithms/dfs';
+import { BiDirectionalSwarm } from '../algorithms/bidirectional-swarm';
 import { mapSpeed } from '../utils/utils';  
 import InformationBanner from './InformationBanner';
 
