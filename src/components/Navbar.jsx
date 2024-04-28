@@ -72,7 +72,7 @@ const Navbar = ({ visualize, findingPath, clearBoard, clearWalls, clearPath, spe
           Mazes & Patterns <IoMdArrowDropdown className = {iconClass} />
         </div>
 
-        <button className={`${findingPath? "bg-gray-400":"bg-lightblue"} py-2 px-5 rounded font-normal ${findingPath && "text-black"}`} onClick={visualize} disabled={findingPath} >
+        <button className={`${findingPath? "bg-gray-400":"bg-lightblue"} py-2 px-5 rounded font-normal ${findingPath && "text-black"}`} onClick={visualize} disabled={findingPath || algo==''} >
           {algo == ''? 'Pick your algorithm': 'Visualize ' + algo}
         </button>
 

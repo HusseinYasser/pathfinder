@@ -26,8 +26,10 @@ const Node = ({ row, col, start, end, wall, onMouseDown, onMouseEnter, onMouseUp
     {
       icon = <GiAmericanFootballHelmet className={`w-full h-full ${iconColor}`} />
     }
-    if(weight)
+    if(weight){
       icon = <FaWeightHanging className={`w-full h-full ${iconColor}`}></FaWeightHanging>
+      animations='';
+    }
 
   return (
     <div className = {`w-cell h-7 border border-solid border-blue-200 ${nodeColor} ${(wall||weight) && "animate-fill"} ${animate && animations}  ` } 

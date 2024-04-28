@@ -84,14 +84,12 @@ const Grid = ({ walls, setWalls, weights, setWeights, startNode, setStartNode, e
     
 
     const startAddingWeights = (event) => {
-        if(event.key == 'w'){
+        if(event.key == 'w' || event.key == 'W')
             setAddingWeights(true);
-            console.log('A5eram')
-        }
     }
 
     const finishAddingWeights = (event) => {
-        if(event.key == 'w')
+        if(event.key == 'w' || event.key == 'W')
             setAddingWeights(false);
     }
 

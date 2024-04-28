@@ -59,6 +59,7 @@ const PathFinder = () => {
 
     const clearWalls = () => {
         setWalls(new Set());
+        setWeights(new Set());
     }
 
     const clearBoard = () => {
