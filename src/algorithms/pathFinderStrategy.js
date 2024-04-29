@@ -1,6 +1,6 @@
 class PathFinderStrategy {
   constructor() {}
-  visualizePath(_rows, _cols, _walls, _startNode, _endNode) {}
+  visualizePath(_rows, _cols, _walls, _weights, _startNode, _endNode) {}
 }
 
 class PathFinderContext {
@@ -12,8 +12,8 @@ class PathFinderContext {
     this.speed = speed;
   }
 
-  findPath(rows, cols, walls, startNode, endNode) {
-    let { visitedInOrder, pathInOrder } = this.strategy.visualizePath(rows, cols, walls, startNode, endNode);
+  findPath(rows, cols, walls, weights, startNode, endNode) {
+    let { visitedInOrder, pathInOrder } = this.strategy.visualizePath(rows, cols, walls, weights, startNode, endNode);
     pathInOrder = this.getPath(startNode, endNode, pathInOrder);
     this.setVisitedNodes([]);
     this.setPath([]);

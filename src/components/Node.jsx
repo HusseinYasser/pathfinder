@@ -28,7 +28,6 @@ const Node = ({ row, col, start, end, wall, onMouseDown, onMouseEnter, onMouseUp
     }
     if(weight){
       icon = <FaWeightHanging className={`w-full h-full ${iconColor}`}></FaWeightHanging>
-      animations='';
     }
 
   return (

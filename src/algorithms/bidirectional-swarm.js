@@ -16,7 +16,7 @@ class BiDirectionalSwarm extends PathFinderStrategy {
     return i >= 0 && i < rows && j >= 0 && j < cols;
   }
 
-  visualizePath(rows, cols, walls, startNode, endNode) {
+  visualizePath(rows, cols, walls, _, startNode, endNode) {
     let queueLeft = [];
     let queueRight = [];
     let dis1 = {};

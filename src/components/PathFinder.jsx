@@ -5,6 +5,7 @@ import { PathFinderContext } from '../algorithms/pathFinderStrategy';
 import { BFS } from '../algorithms/bfs';
 import { DFS } from '../algorithms/dfs';
 import { BiDirectionalSwarm } from '../algorithms/bidirectional-swarm';
+import { Dijkstra } from '../algorithms/dijkstra';
 import { mapSpeed } from '../utils/utils';  
 import InformationBanner from './InformationBanner';
 
@@ -44,7 +45,7 @@ const PathFinder = () => {
 
     const visualize = ( updating ) => {
         const pathFinder = new PathFinderContext(eval(`new ${algo}()`), setVisitedNodes, setPath, updating, mapSpeed(speed));
-        const delayTime = pathFinder.findPath(27, 50, walls, startNode, endNode);
+        const delayTime = pathFinder.findPath(27, 50, walls, weights, startNode, endNode);
         if(!updating) {
             setAppliedFinder(true);
             setLockGrid(true);
