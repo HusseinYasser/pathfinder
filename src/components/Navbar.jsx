@@ -7,6 +7,7 @@ import { DFS } from '../algorithms/dfs';
 import { Dijkstra } from '../algorithms/dijkstra';
 import { AStar } from '../algorithms/a_star';
 import { BiDirectionalSwarm } from '../algorithms/bidirectional-swarm';
+import { BestFirstSearch } from "../algorithms/greedy";
 
 // eslint-disable-next-line react/prop-types
 const Navbar = ({ visualize, findingPath, clearBoard, clearWalls, clearPath, speed, setSpeed, 
@@ -31,7 +32,7 @@ const Navbar = ({ visualize, findingPath, clearBoard, clearWalls, clearPath, spe
         <div className = {dropDownItemClass} disabled={findingPath} onClick = { () => changeAlgo(DFS.name)} > Depth-first search </div>
         <div className = {dropDownItemClass} disabled={findingPath} onClick = {() => changeAlgo(Dijkstra.name)}> Disjesktra algorithm </div>
         <div className = {dropDownItemClass} disabled={findingPath} onClick = {() => changeAlgo(AStar.name)}> A* algorithm </div>
-        <div className = {dropDownItemClass} disabled={findingPath}> Greedy best-first search </div>
+        <div className = {dropDownItemClass} disabled={findingPath} onClick = {() => changeAlgo(BestFirstSearch.name)}> Greedy best-first search </div>
         <div className = {dropDownItemClass} disabled={findingPath} onClick={() => changeAlgo(BiDirectionalSwarm.name)} > Bidirectional Swarm Algorithm </div>
     </div>
   );
