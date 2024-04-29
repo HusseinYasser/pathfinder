@@ -5,6 +5,7 @@ import { RiCloseLine } from "react-icons/ri";
 import { BFS } from '../algorithms/bfs';
 import { DFS } from '../algorithms/dfs';
 import { Dijkstra } from '../algorithms/dijkstra';
+import { AStar } from '../algorithms/a_star';
 import { BiDirectionalSwarm } from '../algorithms/bidirectional-swarm';
 
 // eslint-disable-next-line react/prop-types
@@ -26,10 +27,10 @@ const Navbar = ({ visualize, findingPath, clearBoard, clearWalls, clearPath, spe
             onClick={() => setShowAlgoMenus(false)}
           /> 
         </div>
-        <div className = {dropDownItemClass} disabled={findingPath} onClick={ () => changeAlgo(BFS.name)}> Breadth-first search </div>
-        <div className = {dropDownItemClass} disabled={findingPath} onClick={ () => changeAlgo(DFS.name)} > Depth-first search </div>
+        <div className = {dropDownItemClass} disabled={findingPath} onClick = { () => changeAlgo(BFS.name)}> Breadth-first search </div>
+        <div className = {dropDownItemClass} disabled={findingPath} onClick = { () => changeAlgo(DFS.name)} > Depth-first search </div>
         <div className = {dropDownItemClass} disabled={findingPath} onClick = {() => changeAlgo(Dijkstra.name)}> Disjesktra algorithm </div>
-        <div className = {dropDownItemClass} disabled={findingPath} > A* algorithm </div>
+        <div className = {dropDownItemClass} disabled={findingPath} onClick = {() => changeAlgo(AStar.name)}> A* algorithm </div>
         <div className = {dropDownItemClass} disabled={findingPath}> Greedy best-first search </div>
         <div className = {dropDownItemClass} disabled={findingPath} onClick={() => changeAlgo(BiDirectionalSwarm.name)} > Bidirectional Swarm Algorithm </div>
     </div>

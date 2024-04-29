@@ -6,6 +6,7 @@ import { BFS } from '../algorithms/bfs';
 import { DFS } from '../algorithms/dfs';
 import { BiDirectionalSwarm } from '../algorithms/bidirectional-swarm';
 import { Dijkstra } from '../algorithms/dijkstra';
+import { AStar } from '../algorithms/a_star';
 import { mapSpeed } from '../utils/utils';  
 import InformationBanner from './InformationBanner';
 
