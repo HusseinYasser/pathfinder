@@ -10,6 +10,7 @@ import { AStar } from '../algorithms/a_star';
 import { BestFirstSearch } from '../algorithms/greedy';
 import { mapSpeed } from '../utils/utils';  
 import InformationBanner from './InformationBanner';
+import Tutorial from './Tutorial';
 
 const PathFinder = () => {
     
@@ -84,6 +85,7 @@ const PathFinder = () => {
     <>
         <Navbar visualize={() => visualize(false)} findingPath={appliedFinder} clearBoard = {clearBoard} clearPath = {clearPath} clearWalls = {clearWalls}
         speed={speed} setSpeed = {setSpeed} setAlgo={setAlgo} algo={algo} />
+        <Tutorial className = "m-auto" />
         <InformationBanner />
         <Grid walls = {walls} setWalls = {setWalls} 
             weights = {weights} setWeights = {setWeights}
