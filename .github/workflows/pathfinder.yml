@@ -22,7 +22,10 @@ jobs:
     steps:
     - name: Chekcout Code 
       uses: actions/checkout@v4
-    
+      
+    - name: Clear npm cache
+      run: npm cache clean --force
+  
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
