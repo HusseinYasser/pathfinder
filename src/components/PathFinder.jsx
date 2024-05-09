@@ -21,6 +21,7 @@ const PathFinder = () => {
     const [appliedFinder, setAppliedFinder] = useState(false);
     const[speed, setSpeed] = useState('Fast');
     const [algo, setAlgo] = useState('');
+    const [showingTutorial, setShowingTutorial] = new useState(true);
 
     //to lock the behavior of playing woth the grid while generating the paths
     const [lockGrid, setLockGrid] = useState(false);
@@ -85,14 +86,14 @@ const PathFinder = () => {
     <>
         <Navbar visualize={() => visualize(false)} findingPath={appliedFinder} clearBoard = {clearBoard} clearPath = {clearPath} clearWalls = {clearWalls}
         speed={speed} setSpeed = {setSpeed} setAlgo={setAlgo} algo={algo} />
-        <Tutorial className = "m-auto" />
+        {showingTutorial && <Tutorial className = "m-auto" handler = {setShowingTutorial} />}
         <InformationBanner />
         <Grid walls = {walls} setWalls = {setWalls} 
             weights = {weights} setWeights = {setWeights}
             startNode={startNode} endNode={endNode} setStartNode={(nwNode) => {dragTerminalNodes(nwNode, true)}} setEndNode={(nwNdode) => {dragTerminalNodes(nwNdode, false)}}
             visitedNodes = {new Set(visitedNodes)}
             path = {new Set(path)}
-            locked = {lockGrid}
+            locked = {lockGrid || showingTutorial}
             animate={appliedFinder} />
     </>
   )
