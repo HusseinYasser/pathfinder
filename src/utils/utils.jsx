@@ -37,7 +37,7 @@ const generateGridUI = ((grid, animate) => {
                 animate = {animate}
             />);
         }
-        gridUI.push(<div className='flex w-gridWidth m-auto' key = {i}>
+        gridUI.push(<div className='flex w-gridWidth m-auto' style={{'height' : '3%'}} key = {i}>
             {row}
         </div>
         );

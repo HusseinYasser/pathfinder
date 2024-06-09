@@ -99,8 +99,8 @@ const Grid = ({ walls, setWalls, weights, setWeights, startNode, setStartNode, e
     }, []);
 
     return (
-        <div className='flex w-full'>
-            <div className='m-auto flex-col w-full' >
+        <div className='flex w-full h-screen'>
+            <div className='m-auto felx-col w-full h-full' >
                 { generateGridUI(grid, animate) }
             </div>
         </div>

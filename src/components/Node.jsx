@@ -31,7 +31,7 @@ const Node = ({ row, col, start, end, wall, onMouseDown, onMouseEnter, onMouseUp
     }
 
   return (
-    <div className = {`w-cell h-7 border border-solid border-blue-200 ${nodeColor} ${(wall||weight) && "animate-fill"} ${animate && animations}  ` } 
+    <div className = {`w-cell h-full border border-solid border-blue-200 ${nodeColor} ${(wall||weight) && "animate-fill"} ${animate && animations}  ` } 
         onMouseDown={(ev) => { ev.preventDefault(); onMouseDown(row, col); }}
         onMouseEnter={(ev) => {ev.preventDefault(); onMouseEnter(row, col);}}
         onMouseUp={(ev) => {ev.preventDefault(); onMouseUp();}}
