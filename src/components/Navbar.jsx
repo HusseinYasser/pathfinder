@@ -73,8 +73,9 @@ const Navbar = ({ visualize, findingPath, clearBoard, clearWalls, clearPath, spe
           { showAlgoMenus && algorithmsMenus }
         </div>
 
-        <div className={tabsClass}>
-          Mazes & Patterns <IoMdArrowDropdown className = {iconClass} />
+        <div>
+          <div className={tabsClass} onClick={() => setShowSpeedMenus(prev => !prev)}> Speed: {speed} <IoMdArrowDropdown className = {iconClass} /> </div>
+          { showSpeedMenus && speedMenus }
         </div>
 
         <button className={`${findingPath? "bg-gray-400":"bg-lightblue"} py-2 px-5 rounded font-normal ${findingPath && "text-black"}`} onClick={visualize} disabled={findingPath || algo==''} >
@@ -93,10 +94,7 @@ const Navbar = ({ visualize, findingPath, clearBoard, clearWalls, clearPath, spe
           Clear Path
         </div>
 
-        <div>
-          <div className={tabsClass} onClick={() => setShowSpeedMenus(prev => !prev)}> Speed: {speed} <IoMdArrowDropdown className = {iconClass} /> </div>
-          { showSpeedMenus && speedMenus }
-        </div>
+        
 
     </div>
   )
